@@ -1,0 +1,17 @@
+html,
+body {
+    padding-left: 35px;
+    padding-top: 20px;
+    padding-right: 35px;
+    padding-bottom: 35px;
+    color: #fff;
+    background-color: #0094ff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    -webkit-app-region: drag;
+}
+
+input,
+button
+{
+    -webkit-app-region: no-drag;
+}

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chooser</title>
+    <link rel="stylesheet" type="text/css" href="./base.css" />
+    <script type="text/tiscript" src="test.tis"></script>
+</head>
+<body>
+    <div>
+        <div>
+            <h1>Type in to launch an app</h1>
+            <input id="app_text" type="text" />
+            <input id="app_button" type="button" value="Run" />
+        </div>
+        <div>
+            <h1>Type in to launch a website</h1>
+            <input id="url_text" type="text" />
+            <input id="url_button" type="button" value="Open" />
+        </div>
+    </div>
+    <script type="text/tiscript">
+        event click $(input#app_button)
+        {
+            view.launch_command(self#app_text.value);
+            stdout.println(self#app_text.value);
+            return true;
+        }
+
+
+
+    </script>
+
+
+</body>
+</html>

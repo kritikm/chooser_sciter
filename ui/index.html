@@ -27,6 +27,12 @@
             return true;
         }
 
+        event click $(input#url_button)
+        {
+            view.launch_url(self#url_text.value);
+            return true;
+        }
+
 
 
     </script>

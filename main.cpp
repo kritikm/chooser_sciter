@@ -18,22 +18,28 @@ public:
 	BEGIN_FUNCTION_MAP
 		FUNCTION_0("nativeMessage", nativeMessage);
 		FUNCTION_1("launch_command", launch_command);
+		FUNCTION_1("launch_url", launch_url);
 	END_FUNCTION_MAP
 	// function expsed to script:
 	sciter::string  nativeMessage() { return WSTR("Hello C++ World"); }
+
+	sciter::string launch_url(const sciter::value& url)
+	{
+#if defined(_WIN32) || defined(_WIN64)
+        launch_command(url);
+#else if defined(LINUX)
+        auto x = u"xdg-open " + url.to_string();
+        std::cout << typeid(x).name();
+        system(w2t(x));
+        return WSTR("Hmm");
+#endif
+	}
 
 	sciter::string launch_command(const sciter::value& app_name)
 	{
 #if defined(_WIN32) || defined(_WIN64)
 		ShellExecuteW(NULL, L"open", app_name.to_string().c_str(), NULL, NULL, SW_SHOWNORMAL);
 #else if defined(LINUX)
-		char command[256];
-		std::mbstate_t state{};
-
-		for (char16_t c : app_name.to_string())
-		{
-			std::size_t rc = std::c16rtomb(command, c, &state);
-		}
 		system(w2t(app_name.to_string()));
 #endif
 		return WSTR("Done");
